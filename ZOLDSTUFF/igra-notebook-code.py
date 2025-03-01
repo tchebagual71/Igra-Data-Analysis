@@ -16,10 +16,10 @@ plt.style.use('seaborn-v0_8-whitegrid')
 
 # Step 6: Reading the Data Files
 # Read the data files
-with open('data/raw_data.txt', 'r') as file:
+with open('/home/tdieckman/Igra-Data-Analysis/ZOLDSTUFF/data/raw_data.txt', 'r') as file:
     raw_data_text = file.read()
     
-with open('data/derived_data.txt', 'r') as file:
+with open('/home/tdieckman/Igra-Data-Analysis/ZOLDSTUFF/data/derived_data.txt', 'r') as file:
     derived_data_text = file.read()
 
 print(f"Raw data: {len(raw_data_text)} characters")

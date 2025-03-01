@@ -5,6 +5,7 @@
 # Date: February 28, 2025
 
 # Import necessary libraries
+from readline import redisplay
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -242,8 +243,8 @@ def convert_soundings_to_df(soundings):
 # ===================================================
 
 # Set the file paths - adjust these to your actual file locations
-raw_data_file = 'USM0007479f-data-exampleportion.txt'
-derived_data_file = 'USM0007479f-drvd-exampleportion.txt'
+raw_data_file = '/home/tdieckman/Igra-Data-Analysis/USM0007479f-data-exampleportion.txt'
+derived_data_file = '/home/tdieckman/Igra-Data-Analysis/USM0007479f-drvd-exampleportion.txt'
 
 # Parse the raw data file
 print("Parsing raw data file...")
@@ -261,10 +262,10 @@ derived_df = convert_soundings_to_df(derived_soundings)
 
 # Display first few rows of each DataFrame
 print("\nRaw Data Sample:")
-display(raw_df.head())
+print(raw_df.head())
 
 print("\nDerived Data Sample:")
-display(derived_df.head())
+print(derived_df.head())
 
 # ===================================================
 # PART 3: Basic Visualizations

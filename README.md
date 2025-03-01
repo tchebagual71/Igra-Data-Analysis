@@ -38,7 +38,7 @@ import pandas as pd
 from igra_loader import load_igra_data_from_text, soundings_to_dataframe, plot_skewt
 
 # Load data from file
-with open("USM00074794-data.txt", "r") as f:
+with open("/home/tdieckman/Igra-Data-Analysis/USM0007479f-data-exampleportion.txt", "r") as f:
     raw_data = f.read()
 
 # Parse the data
@@ -183,3 +183,106 @@ ds['temperature'].plot(x='datetime', y='pressure')
 - [IGRA v2.2 Documentation](https://www.ncei.noaa.gov/pub/data/igra/igra2-readme.txt)
 - [MetPy Documentation](https://unidata.github.io/MetPy/latest/)
 - [xarray Documentation](https://docs.xarray.dev/en/stable/)
+
+
+Let me complete the `run_igra_analysis.py` script:
+
+Now, let me provide you with a step-by-step guide on how to run these scripts correctly in WSL with VS Code.
+
+## Running the IGRA Analysis Scripts in VS Code with WSL
+
+### Step 1: Set Up Your Environment
+
+First, make sure you have the necessary Python packages installed:
+
+```bash
+pip3 install pandas numpy matplotlib xarray seaborn
+```
+
+### Step 2: Organize Your Files
+
+1. Save all the Python scripts to your working directory:
+   - `igra_loader.py` - The core data loading module
+   - `igra_debug.py` - The debugging utility
+   - `complete_example.py` - The main analysis script
+   - `run_igra_analysis.py` - The command-line runner
+
+2. Make the runner script executable:
+   ```bash
+   chmod +x run_igra_analysis.py
+   ```
+
+3. Create an output directory (optional, scripts will create it automatically):
+   ```bash
+   mkdir -p output
+   ```
+
+### Step 3: Testing the Installation
+
+Let's first test if the `igra_loader.py` module works correctly:
+
+```bash
+cd /home/tdieckman/Igra-Data-Analysis/VanillaPython/
+python3 -c "import igra_loader; print('igra_loader module imported successfully')"
+```
+
+If that works, you're ready to start using the scripts.
+
+### Step 4: Running the Debug Utility
+
+The debug utility is useful to examine your data files and diagnose any issues:
+
+```bash
+python3 igra_debug.py data/USM0007479f-data-exampleportion.txt raw
+```
+
+This will analyze the raw data file and provide detailed information about its structure, data quality, and compatibility with the plotting functions.
+
+You can also run it on the derived data:
+
+```bash
+python3 igra_debug.py data/USM0007479f-drvd-exampleportion.txt derived
+```
+
+### Step 5: Running the Complete Analysis
+
+Now you can run the full analysis script:
+
+```bash
+python3 complete_example.py
+```
+
+This will:
+1. Load both raw and derived data files
+2. Convert them to pandas DataFrames and xarray Datasets
+3. Create several visualization plots
+4. Save the processed data to CSV files
+5. Attempt to save the data to NetCDF format (if successful)
+
+All outputs will be saved to the `output` directory.
+
+### Step 6: Using the Command-Line Runner (Alternative)
+
+For a more flexible approach, you can use the command-line runner:
+
+```bash
+./run_igra_analysis.py analyze --raw data/USM0007479f-data-exampleportion.txt --derived data/USM0007479f-drvd-exampleportion.txt --output output
+```
+
+Or to debug a specific file:
+
+```bash
+./run_igra_analysis.py debug data/USM0007479f-data-exampleportion.txt --type raw
+```
+
+## Troubleshooting Common Issues
+
+1. **Module not found errors**: Make sure all Python files are in the same directory or in a location Python can find.
+
+2. **File not found errors**: Double-check your file paths. The scripts look for data in `/home/tdieckman/Igra-Data-Analysis/VanillaPython/data/` by default.
+
+3. **Plotting errors**: The scripts are designed to handle missing data, but if you get errors related to plotting, it might be because there's not enough valid data for visualization. The debug utility can help identify these issues.
+
+4. **Empty or incorrect output**: Check the console output for warnings or errors. The scripts will attempt to continue even if some operations fail, but they'll print messages explaining the issues.
+
+Let me know if you encounter any specific errors, and I can provide more targeted troubleshooting advice.
